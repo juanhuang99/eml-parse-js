@@ -1,7 +1,7 @@
 # eml-parse-js
 
 > This is a fork of `eml-parse-js`
-1. 打包 umd 文件时，将依赖也打包进去
+> 打包 umd 文件时，将 `@sinonjs/text-encoding`、`js-base64` 两个依赖也打包进去
 
 ## 如何打包
 
@@ -18,5 +18,5 @@ git remote add upstream https://github.com/MQpeng/eml-parse-js
 // 拉取最新代码
 git fetch upstream
 // 将原始仓库的更新合并到你的分支
-git merge upstream/main
+git merge upstream/master
 ```
