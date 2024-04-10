@@ -1,49 +1,32 @@
 import resolve from 'rollup-plugin-node-resolve';
-import typescript from 'rollup-plugin-typescript'
+import typescript from 'rollup-plugin-typescript';
+import commonjs from 'rollup-plugin-commonjs';
 
 export default {
 	input: 'src/index.ts',
 	output: [
 		{
-			format: "amd",
-      file: "lib/bundle.amd.js"
+			format: 'amd',
+			file: 'lib/eml-parse-js.amd.js',
 		},
 		{
-      format: "cjs",
-      file: "lib/bundle.cjs.js"
-    },
-    {
-      format: "es",
-      file: "lib/bundle.esm.js"
-    },
+			format: 'cjs',
+			file: 'lib/eml-parse-js.cjs.js',
+		},
 		{
-			file: 'lib/bundle.umd.js',
+			format: 'es',
+			file: 'lib/eml-parse-js.esm.js',
+		},
+		{
+			file: 'lib/eml-parse-js.umd.js',
 			format: 'umd',
 			name: 'EmlParseJs',
-			globals: {
-				'js-base64': 'Base64',
-				'@sinonjs/text-encoding': 'self'
-			}
 		},
 		{
-			format: "iife",
-			file: "lib/bundle.iife.js",
-			globals: {
-				'js-base64': 'Base64 || (window || this).Base64',
-				'@sinonjs/text-encoding': `{
-					TextEncoder: (window || this)['TextEncoder'],
-					TextDecoder: (window || this)['TextDecoder'],
-				}`,
-			}
+			format: 'iife',
+			file: 'lib/eml-parse-js.iife.js',
+			name: 'EmlParseJs',
 		},
 	],
-	plugins: [
-		typescript(),
-		resolve({
-			customResolveOptions: {
-				moduleDirectory: 'node_modules'
-			}
-		})
-	],
-  external: ['js-base64', '@sinonjs/text-encoding']
+	plugins: [typescript(), resolve(), commonjs()],
 };
